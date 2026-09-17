@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tik Talk - Tic-Tac-Toe Master</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Canvas for win celebration confetti -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="game-header">
+      <div class="logo">
+        <span class="logo-badge">XO</span>
+        <div class="logo-text">
+          <h1>TIK TALK</h1>
+          <span class="subtitle">TIC-TAC-TOE MASTER</span>
+        </div>
+      </div>
+      <button id="sound-toggle-btn" class="icon-btn" title="Toggle Sound (Mute/Unmute)" aria-label="Toggle Sound">
+        <span id="sound-icon">🔊</span>
+      </button>
+    </header>
+
+    <!-- Controls / Settings Bar -->
+    <section class="controls-panel">
+      <!-- Mode Toggle -->
+      <div class="control-group">
+        <label for="mode-select">Game Mode</label>
+        <div class="segmented-control" role="group" aria-label="Game Mode">
+          <button id="mode-pve" class="segment-btn active" data-mode="pve">
+            <span class="icon">🤖</span> vs AI
+          </button>
+          <button id="mode-pvp" class="segment-btn" data-mode="pvp">
+            <span class="icon">👥</span> 2 Players
+          </button>
+        </div>
+      </div>
+
+      <!-- Difficulty (shown when vs AI is selected) -->
+      <div class="control-group" id="difficulty-group">
+        <label for="difficulty-select">AI Difficulty</label>
+        <div class="segmented-control" role="group" aria-label="AI Difficulty">
+          <button class="diff-btn" data-diff="easy">Easy</button>
+          <button class="diff-btn" data-diff="medium">Medium</button>
+          <button class="diff-btn active" data-diff="hard" title="Unbeatable Minimax AI">Master</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scoreboard -->
+    <section class="scoreboard" aria-label="Scoreboard">
+      <div class="score-card player-x">
+        <div class="player-tag">
+          <span class="player-symbol symbol-x">X</span>
+          <span class="player-name" id="name-x">Player 1</span>
+        </div>
+        <div class="score-value" id="score-x">0</div>
+      </div>
+
+      <div class="score-card score-ties">
+        <div class="player-tag">
+          <span class="player-symbol symbol-tie">TIE</span>
+          <span class="player-name">Draws</span>
+        </div>
+        <div class="score-value" id="score-ties">0</div>
+      </div>
+
+      <div class="score-card player-o">
+        <div class="player-tag">
+          <span class="player-symbol symbol-o">O</span>
+          <span class="player-name" id="name-o">AI Bot</span>
+        </div>
+        <div class="score-value" id="score-o">0</div>
+      </div>
+    </section>
+
+    <!-- Turn Status Banner -->
+    <div class="turn-banner" id="status-banner">
+      <span class="turn-indicator-dot" id="turn-dot"></span>
+      <span id="status-text">Your turn (X)</span>
+    </div>
+
+    <!-- Game Board -->
+    <main class="board-wrapper">
+      <div class="game-board" id="board" role="grid" aria-label="Tic-Tac-Toe Grid">
+        <button class="cell" data-index="0" aria-label="Cell 1" role="gridcell"></button>
+        <button class="cell" data-index="1" aria-label="Cell 2" role="gridcell"></button>
+        <button class="cell" data-index="2" aria-label="Cell 3" role="gridcell"></button>
+        <button class="cell" data-index="3" aria-label="Cell 4" role="gridcell"></button>
+        <button class="cell" data-index="4" aria-label="Cell 5" role="gridcell"></button>
+        <button class="cell" data-index="5" aria-label="Cell 6" role="gridcell"></button>
+        <button class="cell" data-index="6" aria-label="Cell 7" role="gridcell"></button>
+        <button class="cell" data-index="7" aria-label="Cell 8" role="gridcell"></button>
+        <button class="cell" data-index="8" aria-label="Cell 9" role="gridcell"></button>
+      </div>
+      <!-- SVG Strike-through line overlay -->
+      <svg class="winning-line-svg" id="winning-line-svg" viewBox="0 0 300 300">
+        <line id="winning-line" x1="0" y1="0" x2="0" y2="0" />
+      </svg>
+    </main>
+
+    <!-- Action Buttons -->
+    <footer class="game-actions">
+      <button id="restart-btn" class="action-btn primary-btn">
+        <span class="btn-icon">🔄</span> Play Again
+      </button>
+      <button id="reset-scores-btn" class="action-btn secondary-btn" title="Reset all match scores">
+        <span>Reset Scores</span>
+      </button>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
